@@ -22,11 +22,15 @@ export class UserController {
 	async getProfile(@CurrentUser('id') id: number) {
 		return this.userService.byId(id)
 	}
+
 	@Get('all')
 	async getall() {
 		return this.userService.getAll()
 	}
-
+	@Get('admin/:id')
+	async setAdmin(@Param('id') id:string) {
+		return this.userService.setAdmin(+id)
+	}
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Put('profile')
